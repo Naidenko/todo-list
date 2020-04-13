@@ -16,8 +16,8 @@
         <form class="note__list">
             <div class="note__item" v-for="(item, key) in itemsPreview" :key="key">
                 <input v-model="item.isDone" class="note-item__checkbox" type="checkbox" name="note-item"
-                       :id="'note-item__checkbox-'+ key" disabled="disabled">
-                <label class="note-item__label" :for="'note-item__checkbox-'+ key">{{item.title}}</label>
+                       disabled="disabled">
+                <label class="note-item__label disabled">{{item.title}}</label>
             </div>
         </form>
     </section>
