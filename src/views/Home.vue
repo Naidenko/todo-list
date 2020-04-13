@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header class="page-header">
+      <h1 class="page-header__title">Заметки</h1>
+
+      <button type="button" class="page-header__new-note">
+        <span class="new-note__desktop">Новая заметка</span>
+      </button>
+    </header>
+    <main class="page-main">
+      <note-list></note-list>
+    </main>
+    <section class="confirm-delete">
+      <p class="delete__text">Вы действительно хотите удалить данную заметку?</p>
+      <button type="button" class="delete__button">Удалить</button>
+      <button type="button" class="cancel__button">Отменить</button>
+    </section>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import NoteList from "../components/NoteList";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    NoteList
   }
 }
 </script>
