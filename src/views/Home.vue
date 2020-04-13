@@ -3,9 +3,9 @@
     <header class="page-header">
       <h1 class="page-header__title">Заметки</h1>
 
-      <button type="button" class="page-header__new-note">
+      <router-link to="/create" class="page-header__new-note">
         <span class="new-note__desktop">Новая заметка</span>
-      </button>
+      </router-link>
     </header>
     <main class="page-main">
       <note-list></note-list>

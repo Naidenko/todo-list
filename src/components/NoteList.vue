@@ -17,7 +17,7 @@
                 notesBackground: [
                     '#fffec9',
                     '#96b2db',
-                    '#3f669f',
+                    '#f3d69b',
                     '#efebeb',
                 ]
             }

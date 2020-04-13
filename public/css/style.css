@@ -129,7 +129,7 @@ body {
 
 .note__delete {
     position: absolute;
-    top: 2px;
+    top: 4px;
     right: 5px;
 
     cursor: pointer;
@@ -141,8 +141,8 @@ body {
 }
 
 .delete {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }
 
 .note__edit {
@@ -169,12 +169,22 @@ body {
 }
 
 .note-item__label {
+    display: block;
     padding-left: 20px;
 
     font-weight: 300;
     font-size: 16px;
     line-height: 18px;
     cursor: pointer;
+}
+
+.note-item__more {
+    padding-left: 20px;
+
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(84, 84, 84, 0.6);
 }
 
 .note-item__checkbox {
@@ -188,8 +198,7 @@ body {
     left: 0;
     width: 14px;
     height: 14px;
-    border: 1px solid rgba(84, 84, 84, 0.3);
-    background-color: rgba(84, 84, 84, 0.1);
+    border: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 .note-item__checkbox:checked + .note-item__label::before {
@@ -212,6 +221,12 @@ body {
 
 .disabled {
     cursor: auto;
+    color: rgba(84, 84, 84, 0.6);
+}
+
+.note-item__checkbox + .disabled::before {
+    border: 1px solid rgba(84, 84, 84, 0.2);
+    background-color: rgba(84, 84, 84, 0.05);
 }
 
 .confirm-delete {
@@ -254,6 +269,149 @@ body {
 .delete__button {
     margin-right: 10px;
     background-color: #d6a2a2;
+}
+
+.note-edit__header {
+    position: relative;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.edit__back {
+    position: absolute;
+    top: 14px;
+    left: 13px;
+
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.edit__button {
+    width: 25%;
+    height: 35px;
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.note-edit__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.note-edit__list {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.undo, .redo, .save {
+    width: 20px;
+    height: 20px;
+}
+
+.control-panel .delete {
+    width: 20px;
+    height: 20px;
+}
+
+.back {
+    width: 18px;
+    height: 18px;
+}
+
+#undo, #save, #delete {
+    fill: rgba(0, 0, 0, 0.5);
+}
+
+#back {
+    fill: rgba(0, 0, 0, 0.6);
+    fill: #ffb000;
+}
+
+.redo {
+    transform: scale(-1, 1);
+}
+
+.control-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    box-shadow: 0 -6px 15px 0 rgba(0,0,0,0.07);
+}
+
+.note-edit .note-item__label{
+    padding-left: 32px;
+    line-height: 22px;
+    font-size: 17px;
+}
+
+.note-edit .note-item__checkbox + .note-item__label::before {
+    top: -2px;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+.note-edit .note-item__checkbox:checked + .note-item__label::before {
+    font-size: 17px;
+    text-align: center;
+    line-height: 22px;
+    color: rgba(84, 84, 84, 0.7);
+    color: #ffb000;
+}
+
+.note-edit .note-item__checkbox:checked + .note-item__label {
+    text-decoration: line-through;
+    color: rgba(84, 84, 84, 0.7);
+}
+
+.note-edit .note-item__checkbox:active + .note-item__label::before,
+.note-edit .note-item__checkbox:hover + .note-item__label::before{
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .25)
+}
+
+.note-edit__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-item__delete {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+}
+
+.cross {
+    width: 20px;
+    height: 20px;
 }
 
 @media (min-width: 768px) {

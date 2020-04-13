@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     notes: [
       {
+        id: 1,
         title: 'Список покупок',
         items: [
           {
@@ -24,6 +25,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 2,
         title: 'Список дел',
         items: [
           {
@@ -37,6 +39,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 3,
         title: 'Список сериалов',
         items: [
           {
@@ -50,6 +53,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 4,
         title: 'Список книг',
         items: [
           {
@@ -60,9 +64,22 @@ export default new Vuex.Store({
             title: 'Долгая прогулка',
             isDone: false
           },
+          {
+            title: 'Мизери',
+            isDone: false
+          },
+          {
+            title: 'Локвуд',
+            isDone: false
+          },
         ]
       },
     ],
+  },
+  getters: {
+    getNote: state => id => {
+      return state.notes.find(note => note.id === id);
+    }
   },
   mutations: {
   },
