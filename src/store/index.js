@@ -82,8 +82,33 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    deleteById: (state, payload) => {
+      const index = state.notes.findIndex(note => note.id === payload.id);
+      if(index > -1) {
+        state.notes.splice(index, 1);
+      }
+    },
+    saveNote: (state, payload) => {
+      if(payload.id === null) { //saving new
+        payload.id = Date.now();
+        state.notes.push(payload);
+      } else { //update
+        const index = state.notes.findIndex(note => note.id === payload.id);
+        if(index > -1) {
+          state.notes[index].title = payload.title;
+          state.notes[index].items = payload.items;
+        }
+      }
+
+    }
   },
   actions: {
+    deleteById: (context, payload) => {
+      context.commit('deleteById', payload);
+    },
+    saveNote: (context, payload) => {
+      context.commit('saveNote', payload);
+    }
   },
   modules: {
   }

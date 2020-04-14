@@ -10,11 +10,6 @@
     <main class="page-main">
       <note-list></note-list>
     </main>
-    <section class="confirm-delete">
-      <p class="delete__text">Вы действительно хотите удалить данную заметку?</p>
-      <button type="button" class="delete__button">Удалить</button>
-      <button type="button" class="cancel__button">Отменить</button>
-    </section>
 
   </div>
 </template>

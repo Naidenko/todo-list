@@ -7,7 +7,7 @@
                 <use xlink:href="#edit"></use>
             </svg>
         </router-link>
-        <button type="button" class="note__delete">
+        <button @click="$emit('delete-note', note.id)" type="button" class="note__delete">
             <span class="visually-hidden">Удалить</span>
             <svg class="delete">
                 <use xlink:href="#delete"></use>
