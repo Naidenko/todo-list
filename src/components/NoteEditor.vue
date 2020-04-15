@@ -62,19 +62,24 @@
                     <use xlink:href="#save"></use>
                 </svg>
             </button>
-            <button @click="deleteNote" class="edit__delete edit__button">
+            <button @click="$refs.deleteModal.show()" class="edit__delete edit__button">
                 <span class="visually-hidden">Удалить заметку</span>
                 <svg class="delete">
                     <use xlink:href="#delete"></use>
                 </svg>
             </button>
         </div>
+        <delete-modal ref="deleteModal" @confirm="deleteNote">
+
+        </delete-modal>
     </section>
 </template>
 
 <script>
+    import DeleteModal from "./deleteModal";
     export default {
         name: "NoteEditor",
+        components: {DeleteModal},
         props: {
             note: {
                 type: Object,
@@ -122,9 +127,9 @@
                 this.$emit('save-note', this.computeNote(true));
             },
             deleteNote(){
-                //todo подтверждение удаления
                 console.log('delete')
                 this.$emit('delete-note', this.note.id);
+                this.confirmDelete = false;
             },
             addItem() {
                 console.log('add items')

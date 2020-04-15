@@ -273,7 +273,6 @@ body {
 }
 
 .confirm-delete {
-    display: none;
     width: 290px;
     padding: 20px;
     box-sizing: border-box;

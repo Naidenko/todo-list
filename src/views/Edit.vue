@@ -1,7 +1,8 @@
 <template>
     <note-editor :note="note"
                  @delete-note="deleteNote"
-                @save-note="saveNote"></note-editor>
+                @save-note="saveNote">
+    </note-editor>
 </template>
 
 <script>

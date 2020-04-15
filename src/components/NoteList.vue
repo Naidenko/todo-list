@@ -1,27 +1,27 @@
 <template>
     <div class="notes__list">
         <note-list-item v-for="(note,key) in notes" :key="key"
-                        @delete-note="deleteNote"
+                        @delete-note="deleteNoteModal"
                         :note="note"
                         :style="{'background-color': notesBackground[key%4]}">
 
         </note-list-item>
-        <section class="confirm-delete">
-            <p class="delete__text">Вы действительно хотите удалить данную заметку?</p>
-            <button type="button" class="delete__button">Удалить</button>
-            <button type="button" class="cancel__button">Отменить</button>
-        </section>
+        <delete-modal ref="deleteModal" @confirm="deleteNote">
+        </delete-modal>
     </div>
 
 </template>
 
 <script>
+    import DeleteModal from "./deleteModal";
     import NoteListItem from "./NoteListItem";
     export default {
         name: "NoteList",
-        components: {NoteListItem},
+        components: {NoteListItem, DeleteModal},
         data() {
             return {
+                deletingItemId: null,
+                confirmDelete: false,
                 notesBackground: [
                     '#fffec9',
                     '#96b2db',
@@ -31,9 +31,12 @@
             }
         },
         methods: {
-            deleteNote(id) {
-                //todo confirm popup
-                this.$store.dispatch('deleteById', {id: id});
+            deleteNoteModal(id) {
+                this.deletingItemId= id;
+                this.$refs.deleteModal.show();
+            },
+            deleteNote() {
+                this.$store.dispatch('deleteById', {id: this.deletingItemId});
             }
         },
         computed: {
