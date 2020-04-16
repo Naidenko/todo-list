@@ -7,12 +7,12 @@
                     <use xlink:href="#back"></use>
                 </svg>
             </button>
-            <input class="note-edit__title" v-model="title" type="text">
+            <input class="note-edit__title" v-model="title" @change="writeHistory" type="text">
         </div>
         <form class="note-edit__list" onkeydown="return event.key !== 'Enter';">
             <div class="note__item note-edit__item" v-for="(item, key) in items" :key="key">
                 <div class="note__item-wrap">
-                    <input :id="'note__item_' + key" v-model="item.isDone" class="note-item__checkbox" type="checkbox" name="note-item">
+                    <input :id="'note__item_' + key" v-model="item.isDone" @change="writeHistory" class="note-item__checkbox" type="checkbox" name="note-item">
                     <label v-if="editItem !== key" :for="'note__item_' + key" class="note-item__label note-edit__label">{{item.title}}</label>
                     <div v-if="editItem === key" class="note-item__input-wrap">
                         <input  v-model="item.title" class="note-item__input" type="text">
@@ -106,6 +106,7 @@
                 history: [],
                 isConfirmShown: false,
                 hasUnsavedChanges: false,
+                currentHistoryItem: null,
             }
         },
         mounted() {
@@ -114,19 +115,42 @@
         methods: {
             toggleItemEditor(key){
                 this.editItem = key;
-                if(key === null) {
-                    this.writeHistory();
-                }
+                this.writeHistory();
             },
             deleteItem(key) {
                 this.items.splice(key, 1);
                 this.writeHistory();
             },
             undoAction(){
-                console.log('undo')
+                // this.toggleItemEditor(null);
+                if( this.currentHistoryItem > 0) {
+                    this.currentHistoryItem--;
+                    const prevState = this.history[this.currentHistoryItem];
+                    this.setState(prevState);
+                    console.log('undoAction');
+                }
             },
             redoAction(){
-                console.log('redo')
+                // this.toggleItemEditor(null);
+                // todo reverse of undo
+                if( this.currentHistoryItem < this.history.length - 1) {
+                    this.currentHistoryItem++;
+                    const nextState = this.history[this.currentHistoryItem];
+                    this.setState(nextState);
+                    console.log('redoAction');
+
+                }
+            },
+            setState(state) {
+                console.log(state);
+                this.title = state.title;
+                this.items.splice(0, this.items.length);
+                for (let i = 0; i < state.items.length; i++) {
+                    this.items.push({
+                        title: state.items[i].title,
+                        isDone: state.items[i].isDone
+                    });
+                }
             },
             saveNote(){
                 console.log('save')
@@ -153,7 +177,8 @@
                 }
 
                 if (!toWrite) {
-                    const lastState = this.history[this.history.length - 1];//todo
+                    const lastState = this.history[this.currentHistoryItem];
+                    console.log(lastState);
                     if (this.title !== lastState.title) {
                         toWrite = true;
                     } else if (this.items.length !== lastState.items.length) {
@@ -166,7 +191,11 @@
                 }
 
                 if(toWrite) {
+                    console.log('writingHistory');
+                    this.history.splice(this.currentHistoryItem + 1, this.history.length);
+                    //todo очистить все в другой ветке
                     this.history.push(this.computeNote());
+                    this.currentHistoryItem = this.history.length - 1;
                 }
             },
             computeNote(addId = false) {

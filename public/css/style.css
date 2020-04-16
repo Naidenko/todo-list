@@ -417,6 +417,7 @@ body {
 }
 
 .note-edit__title {
+    width: 70%;
     margin: 0;
     font-weight: 500;
     font-size: 22px;
@@ -760,5 +761,9 @@ body {
         min-width: 111px;
         margin-right: 25px;
         box-sizing: border-box;
+    }
+
+    .note-edit__title {
+        width: 90%;
     }
 }
