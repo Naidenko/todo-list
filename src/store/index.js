@@ -3,78 +3,85 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+let notes = localStorage.getItem('notes')
+if(notes === null) {
+  notes = [
+    {
+      id: 1,
+      title: 'Список покупок',
+      items: [
+        {
+          title: 'Хлеб',
+          isDone: false
+        },
+        {
+          title: 'Картошка',
+          isDone: true
+        },
+        {
+          title: 'Молоко',
+          isDone: false
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Список дел',
+      items: [
+        {
+          title: 'Позвонить Насте',
+          isDone: false
+        },
+        {
+          title: 'Полить цветы',
+          isDone: false
+        },
+      ]
+    },
+    {
+      id: 3,
+      title: 'Список сериалов',
+      items: [
+        {
+          title: 'Бумажный дом',
+          isDone: false
+        },
+        {
+          title: 'Почему женщины убивают',
+          isDone: false
+        },
+      ]
+    },
+    {
+      id: 4,
+      title: 'Список книг',
+      items: [
+        {
+          title: 'Унесенные ветром',
+          isDone: false
+        },
+        {
+          title: 'Долгая прогулка',
+          isDone: false
+        },
+        {
+          title: 'Мизери',
+          isDone: false
+        },
+        {
+          title: 'Локвуд',
+          isDone: false
+        },
+      ]
+    },
+  ]
+} else {
+  notes = JSON.parse(notes);
+}
+
 export default new Vuex.Store({
   state: {
-    notes: [
-      {
-        id: 1,
-        title: 'Список покупок',
-        items: [
-          {
-            title: 'Хлеб',
-            isDone: false
-          },
-          {
-            title: 'Картошка',
-            isDone: true
-          },
-          {
-            title: 'Молоко',
-            isDone: false
-          }
-        ]
-      },
-      {
-        id: 2,
-        title: 'Список дел',
-        items: [
-          {
-            title: 'Позвонить Насте',
-            isDone: false
-          },
-          {
-            title: 'Полить цветы',
-            isDone: false
-          },
-        ]
-      },
-      {
-        id: 3,
-        title: 'Список сериалов',
-        items: [
-          {
-            title: 'Бумажный дом',
-            isDone: false
-          },
-          {
-            title: 'Почему женщины убивают',
-            isDone: false
-          },
-        ]
-      },
-      {
-        id: 4,
-        title: 'Список книг',
-        items: [
-          {
-            title: 'Унесенные ветром',
-            isDone: false
-          },
-          {
-            title: 'Долгая прогулка',
-            isDone: false
-          },
-          {
-            title: 'Мизери',
-            isDone: false
-          },
-          {
-            title: 'Локвуд',
-            isDone: false
-          },
-        ]
-      },
-    ],
+    notes: notes
   },
   getters: {
     getNote: state => id => {
@@ -86,6 +93,7 @@ export default new Vuex.Store({
       const index = state.notes.findIndex(note => note.id === payload.id);
       if(index > -1) {
         state.notes.splice(index, 1);
+        localStorage.setItem('notes', JSON.stringify(state.notes));
       }
     },
     saveNote: (state, payload) => {
@@ -99,6 +107,7 @@ export default new Vuex.Store({
           state.notes[index].items = payload.items;
         }
       }
+      localStorage.setItem('notes', JSON.stringify(state.notes));
 
     }
   },

@@ -1,12 +1,12 @@
 <template>
     <section class="note-edit">
         <div class="note-edit__header">
-            <router-link to="/" class="edit__back">
+            <button @click="isConfirmShown = true" type="button" class="edit__back">
                 <span class="visually-hidden">Назад</span>
                 <svg class="back">
                     <use xlink:href="#back"></use>
                 </svg>
-            </router-link>
+            </button>
             <input class="note-edit__title" v-model="title" type="text">
         </div>
         <form class="note-edit__list" onkeydown="return event.key !== 'Enter';">
@@ -72,6 +72,11 @@
         <delete-modal ref="deleteModal" @confirm="deleteNote">
 
         </delete-modal>
+        <section v-if="isConfirmShown" class="confirm-exit">
+            <p class="exit__text">Вы действительно хотите выйти? <span class="exit__text--save">(Все несохраненные изменения будут потеряны)</span></p>
+            <router-link to="/" type="button" class="exit__button">Выйти</router-link>
+            <button type="button" class="cancel__exit" @click="isConfirmShown = false">Отменить</button>
+        </section>
     </section>
 </template>
 
@@ -99,6 +104,7 @@
                 items: newItems,
                 editItem: null,
                 history: [],
+                isConfirmShown: false,
                 hasUnsavedChanges: false,
             }
         },
