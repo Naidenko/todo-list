@@ -122,27 +122,21 @@
                 this.writeHistory();
             },
             undoAction(){
-                // this.toggleItemEditor(null);
                 if( this.currentHistoryItem > 0) {
                     this.currentHistoryItem--;
                     const prevState = this.history[this.currentHistoryItem];
                     this.setState(prevState);
-                    console.log('undoAction');
                 }
             },
             redoAction(){
-                // this.toggleItemEditor(null);
-                // todo reverse of undo
                 if( this.currentHistoryItem < this.history.length - 1) {
                     this.currentHistoryItem++;
                     const nextState = this.history[this.currentHistoryItem];
                     this.setState(nextState);
-                    console.log('redoAction');
 
                 }
             },
             setState(state) {
-                console.log(state);
                 this.title = state.title;
                 this.items.splice(0, this.items.length);
                 for (let i = 0; i < state.items.length; i++) {
@@ -153,16 +147,13 @@
                 }
             },
             saveNote(){
-                console.log('save')
                 this.$emit('save-note', this.computeNote(true));
             },
             deleteNote(){
-                console.log('delete')
                 this.$emit('delete-note', this.note.id);
                 this.confirmDelete = false;
             },
             addItem() {
-                console.log('add items')
                 this.items.push({
                     title: '',
                     isDone: false,
@@ -178,7 +169,6 @@
 
                 if (!toWrite) {
                     const lastState = this.history[this.currentHistoryItem];
-                    console.log(lastState);
                     if (this.title !== lastState.title) {
                         toWrite = true;
                     } else if (this.items.length !== lastState.items.length) {
@@ -191,9 +181,7 @@
                 }
 
                 if(toWrite) {
-                    console.log('writingHistory');
                     this.history.splice(this.currentHistoryItem + 1, this.history.length);
-                    //todo очистить все в другой ветке
                     this.history.push(this.computeNote());
                     this.currentHistoryItem = this.history.length - 1;
                 }
