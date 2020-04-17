@@ -1,24 +1,10 @@
-# todo_list
+# Todo list
 
-## Project setup
+## Setup & run with Docker
 ```
-yarn install
-```
+docker build --tag todo_list .
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+docker run --publish 8000:8080 --detach --name todo_list todo_list
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Then navigate to http://localhost:8000
